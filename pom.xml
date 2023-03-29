@@ -44,34 +44,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-
-				<!-- with this will generate 2 jar -->
-				<!-- 1. Jar without classiefier [demo2-0.0.1-SNAPSHOT.jar], it for as dependency in another project spring boot-->
-				<!-- 2. Jar with classiefier [demo2-0.0.1-SNAPSHOT-exec.jar], it for executable jar -->
-				<executions>
-					<execution>
-						<id>repackage</id>
-						<configuration>
-							<!-- to use executable jar-->
-							<classifier>exec</classifier>
-						</configuration>
-					</execution>
-				</executions>
-				<!-- end -->
-
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-
 			<!-- with this will generate 1 another jar -->
 			<!-- 3. Jar with classiefier [demo2-0.0.1-SNAPSHOT-jar-with-dependencies.jar], it for as dependency in another project spring boot -->
 			<plugin>
