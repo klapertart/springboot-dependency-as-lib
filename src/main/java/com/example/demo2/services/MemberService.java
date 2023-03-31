@@ -13,11 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberService {
 
-    @Autowired
-    private MemberRepository memberRepository;
+    //@Autowired
+    //private MemberRepository memberRepository;
 
-    public Member save(Member member){
-        Member save = memberRepository.save(member);
-        return save;
+    public Member save(){
+        Member member = new Member();
+        member.setId("12345678");
+        member.setName("tritronik");
+        return member;
     }
 }
