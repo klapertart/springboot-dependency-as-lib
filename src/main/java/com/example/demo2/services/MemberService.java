@@ -5,6 +5,12 @@ import com.example.demo2.repositories.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author kurakuraninja
  * @since 29/03/23
@@ -13,13 +19,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberService {
 
-    //@Autowired
-    //private MemberRepository memberRepository;
+    private Map<String, Member> memberList = new ConcurrentHashMap<>();
 
-    public Member save(){
-        Member member = new Member();
-        member.setId("12345678");
-        member.setName("tritronik");
-        return member;
+    @Autowired
+    private MemberRepository memberRepository;
+
+    public Member save(Member member){
+        return memberRepository.save(member);
+    }
+
+    @PostConstruct
+    public void cacheMember(){
+        Iterable<Member> all = memberRepository.findAll();
+
+        for (Member member : all) {
+            memberList.put(UUID.randomUUID().toString(), member);
+        }
+    }
+
+    public Map<String, Member> getMemberList(){
+        return memberList;
     }
 }
